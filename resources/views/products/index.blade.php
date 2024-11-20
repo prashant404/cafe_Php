@@ -1,5 +1,52 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>
+        /* Reduce the size of the pagination arrows and text */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px; /* Smaller font size for pagination text */
+        }
+
+        .pagination .page-link {
+            padding: 6px 12px; /* Adjust padding for smaller links */
+            font-size: 14px; /* Ensure the link text is smaller */
+        }
+
+        .pagination .page-item {
+            margin: 0 3px; /* Add spacing between page items */
+        }
+
+        .pagination .page-item.disabled .page-link,
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+
+        .pagination .page-link {
+            border: 1px solid #ddd; /* Border color for page links */
+            border-radius: 4px;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #f0f0f0; /* Hover effect */
+        }
+
+        .pagination .page-item:first-child .page-link,
+        .pagination .page-item:last-child .page-link {
+            font-size: 14px; /* Adjust the size for the first/last arrows */
+        }
+
+        /* Optional: Style the arrows to make them look better */
+        .pagination .page-item .page-link::before {
+            font-size: 18px; /* Resize arrows */
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row mb-3">
@@ -91,8 +138,20 @@
     </div>
 
     <!-- Pagination -->
-    <div class="d-flex justify-content-center">
-        {{ $products->links() }}
-    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $products->previousPageUrl() }}" tabindex="-1">Previous</a>
+            </li>
+            @foreach($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                <li class="page-item {{ $page == $products->currentPage() ? 'active' : '' }}">
+                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                </li>
+            @endforeach
+            <li class="page-item {{ $products->hasMorePages() ? '' : 'disabled' }}">
+                <a class="page-link" href="{{ $products->nextPageUrl() }}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 @endsection
