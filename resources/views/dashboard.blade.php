@@ -23,11 +23,14 @@
     <i class="bi bi-graph-up me-2"></i>Track Income
 </a>
 
-                        <a href="{{ route('logout') }}" 
-                           class="list-group-item list-group-item-action text-danger"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="bi bi-box-arrow-right me-2"></i>Logout
-                        </a>
+<a href="{{ route('admin.settings') }}" class="list-group-item list-group-item-action">
+    <i class="bi bi-gear me-2"></i>Admin Settings
+</a>
+<a href="{{ route('logout') }}" 
+   class="list-group-item list-group-item-action text-danger"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <i class="bi bi-box-arrow-right me-2"></i>Logout
+</a>
                         
                     </div>
                 </div>

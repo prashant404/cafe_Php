@@ -72,7 +72,6 @@
 
         <div class="bill-details">
             <p><strong>Order ID:</strong> {{ $order->id }}</p>
-            <p><strong>Customer Name:</strong> {{ $order->customer_name }}</p>
             <p><strong>Total Amount:</strong> ${{ number_format($order->total, 2) }}</p>
         </div>
 
@@ -91,8 +90,8 @@
                     <tr>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->pivot->quantity }}</td>
-                        <td>₹{{ number_format($product->price, 2) }}</td>
-                        <td>₹{{ number_format($product->pivot->quantity * $product->price, 2) }}</td>
+                        <td>Rs. {{ number_format($product->price, 2) }}</td>
+                        <td>Rs. {{ number_format($product->pivot->quantity * $product->price, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>

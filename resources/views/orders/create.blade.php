@@ -1,55 +1,65 @@
-<!-- resources/views/orders/create.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h1>Create Order</h1>
 
-    <form id="order-form" action="{{ route('orders.store') }}" method="POST">
-        @csrf
+    <div class="row">
+        <!-- Left Section: Form -->
+        <div class="col-md-6">
+            <form id="order-form" action="{{ route('orders.store') }}" method="POST">
+                @csrf
 
-        <!-- Category Selection -->
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select id="category" class="form-control">
-                <option value="">Select Category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
+                
+
+                <!-- Category Selection -->
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" class="form-control">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Product Selection -->
+                <div class="form-group mt-3">
+                    <label for="products">Products</label>
+                    <select id="products" class="form-control" disabled>
+                        <option value="">Select Product</option>
+                    </select>
+                </div>
+
+                <!-- Quantity Input -->
+                <div class="form-group mt-3">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" class="form-control" min="1">
+                </div>
+
+                <button type="button" class="btn btn-secondary mt-3" id="add-to-order">Add to Order</button>
+
+                <input type="hidden" name="products" id="hidden-products">
+            </form>
         </div>
 
-        <!-- Product Selection -->
-        <div class="form-group mt-3">
-            <label for="products">Products</label>
-            <select id="products" class="form-control" disabled>
-                <option value="">Select Product</option>
-            </select>
+        <!-- Right Section: Order Summary and Buttons -->
+        <div class="col-md-6">
+            <!-- Order Summary -->
+            <h3>Order Summary</h3>
+            <ul id="order-summary" class="list-group"></ul>
+
+            <!-- Total Price -->
+            <div class="mt-3 text-right">
+                <h4>Total: ₹<span id="total-amount">0.00</span></h4>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" form="order-form" class="btn btn-primary mt-3" id="create-order-btn" disabled>
+                Create Order
+            </button>
         </div>
-
-        <!-- Quantity Input -->
-        <div class="form-group mt-3">
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" class="form-control" min="1">
-        </div>
-
-        <button type="button" class="btn btn-secondary mt-3" id="add-to-order">Add to Order</button>
-
-        <!-- Order Summary -->
-        <h3 class="mt-4">Order Summary</h3>
-        <ul id="order-summary" class="list-group"></ul>
-
-        <!-- Total Price -->
-        <div class="mt-3 text-right">
-            <h4>Total: ₹<span id="total-amount">0.00</span></h4>
-        </div>
-
-        <input type="hidden" name="products" id="hidden-products">
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mt-3" id="create-order-btn" disabled>Create Order</button>
-    </form>
+    </div>
 </div>
 
 <script>

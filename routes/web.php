@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IncomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminSettingsController;
+
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -34,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class)->except(['show', 'edit', 'update']);
 
     Route::get('/income', [IncomeController::class, 'index'])->name('income.index');
+    Route::get('/admin/settings', [AdminSettingsController::class, 'index'])->name('admin.settings');
+Route::post('/admin/settings/update', [AdminSettingsController::class, 'update'])->name('admin.settings.update');
 });
 
 // Logout route
