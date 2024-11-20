@@ -67,14 +67,7 @@
                             </button>
                         </div>
                         
-                        <!-- Forgot Password Link -->
-                        <div class="mt-3 text-center">
-                            @if (Route::has('password.request'))
-                                <a class="text-decoration-none" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </div>
+                        
                     </form>
                 </div>
             </div>
